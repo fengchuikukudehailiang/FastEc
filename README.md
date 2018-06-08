@@ -1,7 +1,10 @@
 # FastEc
+<<<<<<< Updated upstream
 
 ## APP显示效果
 
+=======
+>>>>>>> Stashed changes
 - [项目初始化](https://github.com/fengchuikukudehailiang/FastEc/blob/master/blogs/1.%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96.md)
 - [欢迎页封装](https://github.com/fengchuikukudehailiang/FastEc/blob/master/blogs/2.%E6%AC%A2%E8%BF%8E%E9%A1%B5%E5%B0%81%E8%A3%85.md)
 - [登录和注册](https://github.com/fengchuikukudehailiang/FastEc/blob/master/blogs/3.%E7%99%BB%E5%BD%95%E5%92%8C%E6%B3%A8%E5%86%8C.md)
