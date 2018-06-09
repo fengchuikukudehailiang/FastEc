@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/icon_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="{fa-glass} to {icon-scan} to {icon-ali-pay}"
+        tools:ignore="HardcodedText" />
 
 </android.support.v7.widget.LinearLayoutCompat>
