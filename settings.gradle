@@ -1,1 +1,1 @@
-include ':fastec'
+include ':fastec', ':latte-annotations', ':latte-compiler', ':latte-core', ':latte-ec', ':latte-ui'
