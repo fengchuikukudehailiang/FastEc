@@ -7,6 +7,8 @@ import com.cock.latte.core.net.callback.IFailure;
 import com.cock.latte.core.net.callback.IRequest;
 import com.cock.latte.core.net.callback.ISuccess;
 import com.cock.latte.core.net.callback.RequestCallbacks;
+import com.cock.latte.core.ui.LatteLoader;
+import com.cock.latte.core.ui.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;
@@ -31,6 +33,7 @@ public final class RestClient {
     private final IError ERROR;
     private final RequestBody BODY;
     private final File FILE;
+    private final LoaderStyle LOADER_STYLE;
     private final Context CONTEXT;
 
     public RestClient(String url,
@@ -44,6 +47,7 @@ public final class RestClient {
                       IError error,
                       RequestBody body,
                       File file,
+                      LoaderStyle loaderStyle,
                       Context context) {
         this.URL = url;
         PARAMS.putAll(params);
@@ -56,6 +60,7 @@ public final class RestClient {
         this.ERROR = error;
         this.BODY = body;
         this.FILE = file;
+        this.LOADER_STYLE = loaderStyle;
         this.CONTEXT = context;
     }
 
@@ -69,6 +74,10 @@ public final class RestClient {
 
         if (REQUEST != null) {
             REQUEST.onRequestStart();
+        }
+
+        if (LOADER_STYLE != null) {
+            LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
 
         switch (method) {
@@ -111,7 +120,8 @@ public final class RestClient {
                 REQUEST,
                 SUCCESS,
                 FAILURE,
-                ERROR
+                ERROR,
+                LOADER_STYLE
         );
     }
 

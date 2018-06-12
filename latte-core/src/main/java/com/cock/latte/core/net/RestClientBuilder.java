@@ -6,9 +6,9 @@ import com.cock.latte.core.net.callback.IError;
 import com.cock.latte.core.net.callback.IFailure;
 import com.cock.latte.core.net.callback.IRequest;
 import com.cock.latte.core.net.callback.ISuccess;
+import com.cock.latte.core.ui.LoaderStyle;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -28,6 +28,7 @@ public final class RestClientBuilder {
     private String mDownloadDir = null;
     private String mExtension = null;
     private String mName = null;
+    private LoaderStyle mLoaderStyle = null;
 
     public RestClientBuilder() {
     }
@@ -97,10 +98,21 @@ public final class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder load(Context context, LoaderStyle style) {
+        this.mContext = context;
+        this.mLoaderStyle = style;
+        return this;
+    }
+    public final RestClientBuilder load(Context context) {
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallClipRotateIndicator;
+        return this;
+    }
+
     public final RestClient build() {
         return new RestClient(mUrl, PARAMS, mDownloadDir,
                 mExtension, mName, mIRequest, mISuccess,
-                mIFailure, mIError, mBody, mFile, mContext);
+                mIFailure, mIError, mBody, mFile, mLoaderStyle, mContext);
     }
 
 }

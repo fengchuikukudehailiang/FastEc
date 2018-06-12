@@ -14,6 +14,7 @@ public class FastEcApp extends Application {
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withApiHost("http://www.baidu.com")
+                .withLoaderDelayed(3000)
                 .configure();
     }
 }

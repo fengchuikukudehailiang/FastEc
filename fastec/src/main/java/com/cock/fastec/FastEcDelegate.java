@@ -11,6 +11,7 @@ import com.cock.latte.core.net.RestClient;
 import com.cock.latte.core.net.callback.IError;
 import com.cock.latte.core.net.callback.IFailure;
 import com.cock.latte.core.net.callback.ISuccess;
+import com.cock.latte.core.ui.LoaderStyle;
 
 public class FastEcDelegate extends LatteDelegate {
 
@@ -28,6 +29,7 @@ public class FastEcDelegate extends LatteDelegate {
         RestClient.builder()
                 .url("http://www.baidu.com")
                 .params("", "")
+                .load(getContext(), LoaderStyle.BallPulseIndicator)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {

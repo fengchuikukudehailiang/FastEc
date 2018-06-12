@@ -1,6 +1,7 @@
 package com.cock.latte.core.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 public final class Latte {
 
@@ -21,6 +22,10 @@ public final class Latte {
 
     public static Context getApplicationContext() {
         return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
+    }
+
+    public static Handler getHandler() {
+        return getConfiguration(ConfigKeys.HANDLER);
     }
 
 }

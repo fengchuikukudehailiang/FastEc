@@ -1,5 +1,7 @@
 package com.cock.latte.core.app;
 
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -12,9 +14,11 @@ public final class Configurator {
 
     private static final Map<Object, Object> LATTE_CONFIGS = new HashMap<>();
     private static final List<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     public Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
+        LATTE_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
     }
 
     static Configurator getInstance() {
@@ -36,6 +40,10 @@ public final class Configurator {
 
     public final Configurator withApiHost(String host) {
         LATTE_CONFIGS.put(ConfigKeys.API_HOST, host);
+        return this;
+    }
+    public final Configurator withLoaderDelayed(long delayed) {
+        LATTE_CONFIGS.put(ConfigKeys.LOADER_DELAYED, delayed);
         return this;
     }
 
