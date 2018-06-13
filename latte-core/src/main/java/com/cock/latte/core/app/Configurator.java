@@ -10,11 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Interceptor;
+
 public final class Configurator {
 
     private static final Map<Object, Object> LATTE_CONFIGS = new HashMap<>();
     private static final List<IconFontDescriptor> ICONS = new ArrayList<>();
     private static final Handler HANDLER = new Handler();
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     public Configurator() {
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
@@ -58,6 +61,18 @@ public final class Configurator {
 
     public final Configurator withIcon(IconFontDescriptor descriptor) {
         ICONS.add(descriptor);
+        return this;
+    }
+
+    public final Configurator withInterceptor(Interceptor interceptor) {
+        INTERCEPTORS.add(interceptor);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withInterceptors(ArrayList<Interceptor> interceptors) {
+        INTERCEPTORS.addAll(interceptors);
+        LATTE_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
         return this;
     }
 

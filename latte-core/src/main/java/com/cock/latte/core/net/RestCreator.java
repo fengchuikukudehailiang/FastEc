@@ -3,13 +3,38 @@ package com.cock.latte.core.net;
 import com.cock.latte.core.app.ConfigKeys;
 import com.cock.latte.core.app.Latte;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public final class RestCreator {
+
+
+    /**
+     * 构建OkHttp
+     */
+    private static final class OKHttpHolder {
+        private static final int TIME_OUT = 60;
+        private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        private static final ArrayList<Interceptor> INTERCEPTORS = Latte.getConfiguration(ConfigKeys.INTERCEPTOR);
+
+        private static OkHttpClient.Builder addInterceptor() {
+            if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
+                for (Interceptor interceptor : INTERCEPTORS) {
+                    BUILDER.addInterceptor(interceptor);
+                }
+            }
+            return BUILDER;
+        }
+
+        public static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .build();
+    }
 
     /**
      * 构建全局Retrofit客户端
@@ -22,18 +47,6 @@ public final class RestCreator {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
     }
-
-    /**
-     * 构建OkHttp
-     */
-    private static final class OKHttpHolder {
-        private static final int TIME_OUT = 60;
-
-        public static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
-                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .build();
-    }
-
 
     /**
      * Service接口

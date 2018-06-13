@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.core.net.RestClient;
 import com.cock.latte.core.net.callback.IError;
@@ -27,25 +28,23 @@ public class FastEcDelegate extends LatteDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-                .url("http://www.baidu.com")
+                .url("http://127.0.0.1/index.html")
                 .params("", "")
                 .load(getContext(), LoaderStyle.BallPulseIndicator)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Latte.getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {
                     @Override
                     public void onFailure() {
-
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-
                     }
                 })
                 .build()
