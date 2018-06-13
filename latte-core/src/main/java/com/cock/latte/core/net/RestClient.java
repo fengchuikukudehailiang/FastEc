@@ -7,11 +7,11 @@ import com.cock.latte.core.net.callback.IFailure;
 import com.cock.latte.core.net.callback.IRequest;
 import com.cock.latte.core.net.callback.ISuccess;
 import com.cock.latte.core.net.callback.RequestCallbacks;
+import com.cock.latte.core.net.download.DownloadHandler;
 import com.cock.latte.core.ui.LatteLoader;
 import com.cock.latte.core.ui.LoaderStyle;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -22,7 +22,7 @@ import retrofit2.Callback;
 
 public final class RestClient {
 
-    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final WeakHashMap<String, Object> PARAMS;
     private final String URL;
     private final IRequest REQUEST;
     private final String DOWNLOAD_DIR;
@@ -37,7 +37,7 @@ public final class RestClient {
     private final Context CONTEXT;
 
     public RestClient(String url,
-                      Map<String, Object> params,
+                      WeakHashMap<String, Object> params,
                       String download_dir,
                       String extension,
                       String name,
@@ -50,7 +50,7 @@ public final class RestClient {
                       LoaderStyle loaderStyle,
                       Context context) {
         this.URL = url;
-        PARAMS.putAll(params);
+        this.PARAMS = params;
         this.REQUEST = request;
         this.DOWNLOAD_DIR = download_dir;
         this.EXTENSION = extension;
@@ -160,6 +160,9 @@ public final class RestClient {
     }
 
     public final void download() {
+        new DownloadHandler(URL, PARAMS, REQUEST,
+                DOWNLOAD_DIR, EXTENSION, NAME,
+                SUCCESS, FAILURE, ERROR);
     }
 
 }

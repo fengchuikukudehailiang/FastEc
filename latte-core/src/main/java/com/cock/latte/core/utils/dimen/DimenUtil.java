@@ -1,4 +1,4 @@
-package com.cock.latte.core.utils;
+package com.cock.latte.core.utils.dimen;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

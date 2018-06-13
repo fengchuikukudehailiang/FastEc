@@ -16,7 +16,7 @@ import okhttp3.RequestBody;
 
 public final class RestClientBuilder {
 
-    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<String, Object>();
     private String mUrl = null;
     private IRequest mIRequest = null;
     private ISuccess mISuccess = null;
@@ -103,6 +103,7 @@ public final class RestClientBuilder {
         this.mLoaderStyle = style;
         return this;
     }
+
     public final RestClientBuilder load(Context context) {
         this.mContext = context;
         this.mLoaderStyle = LoaderStyle.BallClipRotateIndicator;

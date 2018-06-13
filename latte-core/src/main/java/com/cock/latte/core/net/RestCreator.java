@@ -3,9 +3,6 @@ package com.cock.latte.core.net;
 import com.cock.latte.core.app.ConfigKeys;
 import com.cock.latte.core.app.Latte;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -37,16 +34,6 @@ public final class RestCreator {
                 .build();
     }
 
-    /**
-     * 参数容器
-     */
-    private static final class ParamsHolder {
-        private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
-    }
-
-    public static WeakHashMap<String, Object> getParams() {
-        return ParamsHolder.PARAMS;
-    }
 
     /**
      * Service接口
