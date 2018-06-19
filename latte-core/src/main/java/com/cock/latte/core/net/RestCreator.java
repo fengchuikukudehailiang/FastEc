@@ -3,6 +3,7 @@ package com.cock.latte.core.net;
 import com.cock.latte.core.app.ConfigKeys;
 import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.net.rx.RxRestService;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +29,7 @@ public final class RestCreator {
             if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
                 for (Interceptor interceptor : INTERCEPTORS) {
                     BUILDER.addInterceptor(interceptor);
+                    BUILDER.addNetworkInterceptor(new StethoInterceptor());
                 }
             }
             return BUILDER;

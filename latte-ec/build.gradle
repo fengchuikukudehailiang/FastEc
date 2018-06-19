@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 27
 
@@ -26,5 +26,6 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.orhanobut:logger:2.2.0'
     api project(':latte-ui')
 }

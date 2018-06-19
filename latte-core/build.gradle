@@ -53,4 +53,13 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.1.13'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //Log
+    api 'com.orhanobut:logger:2.2.0'
+    //数据库依赖
+    api 'org.greenrobot:greendao:3.2.0'
+    api 'org.greenrobot:greendao-generator:3.2.0'
+    //数据库查看工具
+    api 'com.facebook.stetho:stetho:1.5.0'
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    api 'com.facebook.stetho:stetho-js-rhino:1.5.0'
 }

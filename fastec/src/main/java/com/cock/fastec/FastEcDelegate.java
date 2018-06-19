@@ -6,6 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.cock.latte.core.delegates.LatteDelegate;
+import com.cock.latte.core.net.rx.RxRestClient;
+import com.cock.latte.core.ui.LoaderStyle;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class FastEcDelegate extends LatteDelegate {
 
@@ -20,7 +27,7 @@ public class FastEcDelegate extends LatteDelegate {
     }
 
     private void testRestClient() {
-        //String url = "https://www.baidu.com";
+        String url = "https://www.baidu.com";
         /*WeakHashMap<String, Object> params = new WeakHashMap<>();
         Observable<String> observable = RestCreator.getRxRestService().get(url, params);
         observable.subscribeOn(Schedulers.io())
@@ -46,7 +53,7 @@ public class FastEcDelegate extends LatteDelegate {
 
                     }
                 });*/
-       /* RxRestClient
+       /*RxRestClient
                 .builder()
                 .url(url)
                 .build()
@@ -75,27 +82,34 @@ public class FastEcDelegate extends LatteDelegate {
 
                     }
                 });*/
-       /* RestClient.builder()
-                .url("http://127.0.0.1/index.html")
+        RxRestClient.builder()
+                .url(url)
                 .params("", "")
-                .load(getContext(), LoaderStyle.BallPulseIndicator)
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Toast.makeText(Latte.getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                    }
-                })
-                .failure(new IFailure() {
-                    @Override
-                    public void onFailure() {
-                    }
-                })
-                .error(new IError() {
-                    @Override
-                    public void onError(int code, String msg) {
-                    }
-                })
+                .loader(getContext(), LoaderStyle.BallPulseIndicator)
                 .build()
-                .get();*/
+                .get()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
