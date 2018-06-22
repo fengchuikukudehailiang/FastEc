@@ -6,8 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.cock.latte.core.activities.ProxyActivity;
+import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.ec.launcher.LauncherDelegate;
+import com.cock.latte.ec.main.EcBottomDelegate;
 import com.cock.latte.ec.sign.ISignListener;
 import com.cock.latte.ec.sign.SignInDelegate;
 import com.cock.latte.ui.launcher.ILauncherListener;
@@ -23,6 +25,7 @@ public class FastEcActivity extends ProxyActivity implements
         if (actionBar != null) {
             actionBar.hide();
         }
+        Latte.getConfigurator().withWeChatActivity(this);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class FastEcActivity extends ProxyActivity implements
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动成功用户已经登录", Toast.LENGTH_SHORT).show();
-                startWithPop(new FastEcDelegate());
+                startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动成功用户没有登录", Toast.LENGTH_SHORT).show();

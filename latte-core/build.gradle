@@ -62,4 +62,6 @@ dependencies {
     api 'com.facebook.stetho:stetho:1.5.0'
     api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     api 'com.facebook.stetho:stetho-js-rhino:1.5.0'
+    //微信依赖（包含统计）
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
 }

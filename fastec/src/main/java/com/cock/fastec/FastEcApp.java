@@ -18,9 +18,11 @@ public class FastEcApp extends Application {
         Latte.init(this)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
-                .withApiHost("http://127.0.0.1/")
+                .withApiHost("http://114.67.229.240/rest/api/")
                 .withLoaderDelayed(1000)
-                .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withInterceptor(new DebugInterceptor("text", R.raw.test))
+                .withWeChatAppId("")
+                .withWeChatAppScript("")
                 .configure();
         //初始化数据库
         DatabaseManager.getInstance().init(this);

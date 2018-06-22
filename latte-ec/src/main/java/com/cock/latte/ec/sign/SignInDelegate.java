@@ -7,11 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.core.net.RestClient;
 import com.cock.latte.core.net.callback.ISuccess;
 import com.cock.latte.core.utils.log.LatteLogger;
+import com.cock.latte.core.wechat.LatteWeChat;
+import com.cock.latte.core.wechat.callbacks.IWeChatSignInCallback;
 import com.cock.latte.ec.R;
 
 public class SignInDelegate extends LatteDelegate implements View.OnClickListener {
@@ -100,7 +103,13 @@ public class SignInDelegate extends LatteDelegate implements View.OnClickListene
         getSupportDelegate().start(new SignUpDelegate());
     }
 
+    //微信登录回调
     private void onClickWeChat() {
-
+        LatteWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+                Toast.makeText(getContext(), "userInfo:" + userInfo, Toast.LENGTH_SHORT).show();
+            }
+        }).signIn();
     }
 }
