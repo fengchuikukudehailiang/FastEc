@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.net.interceptors.DebugInterceptor;
-import com.cock.latte.ec.database.DatabaseManager;
 import com.cock.latte.ec.icon.FontEcModule;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -25,7 +24,7 @@ public class FastEcApp extends Application {
                 .withWeChatAppScript("")
                 .configure();
         //初始化数据库
-        DatabaseManager.getInstance().init(this);
+        // DatabaseManager.getInstance().init(this);
         //log初始化
         Logger.addLogAdapter(new AndroidLogAdapter());
         //数据库查看工具

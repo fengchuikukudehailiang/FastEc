@@ -64,4 +64,8 @@ dependencies {
     api 'com.facebook.stetho:stetho-js-rhino:1.5.0'
     //微信依赖（包含统计）
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
+    //沉浸式状态栏
+    api('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }

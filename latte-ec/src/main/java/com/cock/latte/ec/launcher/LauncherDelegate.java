@@ -26,7 +26,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
     private AppCompatTextView mTvTimer = null;
     private Timer mTimer = null;
-    private int mCount = 2;
+    private int mCount = 1;
     private ILauncherListener mILauncherListener = null;
 
     private void onClickTimerView() {

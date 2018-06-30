@@ -15,6 +15,8 @@ import com.cock.latte.ec.sign.SignInDelegate;
 import com.cock.latte.ui.launcher.ILauncherListener;
 import com.cock.latte.ui.launcher.OnLauncherFinishTag;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class FastEcActivity extends ProxyActivity implements
         ISignListener, ILauncherListener {
 
@@ -26,6 +28,7 @@ public class FastEcActivity extends ProxyActivity implements
             actionBar.hide();
         }
         Latte.getConfigurator().withWeChatActivity(this);
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     @Override
