@@ -10,6 +10,7 @@ import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.ec.launcher.LauncherDelegate;
 import com.cock.latte.ec.main.EcBottomDelegate;
+import com.cock.latte.ec.main.index.IndexDelegate;
 import com.cock.latte.ec.sign.ISignListener;
 import com.cock.latte.ec.sign.SignInDelegate;
 import com.cock.latte.ui.launcher.ILauncherListener;
@@ -39,11 +40,13 @@ public class FastEcActivity extends ProxyActivity implements
     @Override
     public void onSignInSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        getSupportDelegate().start(new EcBottomDelegate());
     }
 
     @Override
     public void onSignUpSuccess() {
         Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        getSupportDelegate().start(new SignInDelegate());
     }
 
     @Override

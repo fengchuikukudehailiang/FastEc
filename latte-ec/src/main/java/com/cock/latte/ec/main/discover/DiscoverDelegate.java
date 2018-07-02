@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.cock.latte.core.delegates.bottom.BottomItemDelegate;
+import com.cock.latte.core.delegates.web.WebDelegateImpl;
+import com.cock.latte.core.delegates.web.chromeclient.WebChromeClientImpl;
 import com.cock.latte.ec.R;
 
 public class DiscoverDelegate extends BottomItemDelegate {
@@ -17,5 +19,13 @@ public class DiscoverDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        final WebDelegateImpl delegate = WebDelegateImpl.create("index.html");
+        delegate.setTopDelegate(this.getParentDelegate());
+        loadRootFragment(R.id.web_discovery_container, delegate);
     }
 }

@@ -1,5 +1,7 @@
 package com.cock.latte.core.wechat;
 
+import android.widget.Toast;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cock.latte.core.net.RestClient;
@@ -69,6 +71,7 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
+                        Toast.makeText(BaseWXEntryActivity.this, response, Toast.LENGTH_SHORT).show();
                         onSignInSuccess(response);
                     }
                 })
