@@ -77,6 +77,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        checkItemCount();
     }
 
     @Override
@@ -127,36 +128,32 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         }
     }
 
+    //购物车单选择删除有问题
     private void onClickRemoveSelectedItem() {
         final List<MultipleItemEntity> data = mAdapter.getData();
         //要删除的数据
         final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
+        int i = 0;
         for (MultipleItemEntity entity : data) {
             final boolean isSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+            entity.setField(ShopCartItemFields.POSITION, i); //每次重新赋值位置
             if (isSelected) {
                 deleteEntities.add(entity);
             }
+            i++;
         }
-        for (MultipleItemEntity entity : deleteEntities) {
-            int removePosition;
-            final int entityPosition = entity.getField(ShopCartItemFields.POSITION);
-            if (entityPosition > mCurrentCount - 1) {
-                removePosition = entityPosition - (mTotalCount - mCurrentCount);
-            } else {
-                removePosition = entityPosition;
-            }
-            if (removePosition <= mAdapter.getItemCount()) {
-                mAdapter.remove(removePosition);
-                mCurrentCount = mAdapter.getItemCount();
-                //更新数据
-                mAdapter.notifyDataSetChanged();
-            }
+        //从List中最后一个开始删除，防止引起下标的变动
+        for (int j = deleteEntities.size()-1; j >=0; j--) {
+            int removePosition = deleteEntities.get(j).getField(ShopCartItemFields.POSITION);
+            mAdapter.remove(removePosition); //remove方法内部调用notifyItemRangeChanged
         }
+        checkItemCount();
     }
 
     private void onClickClear() {
         mAdapter.getData().clear();
         mAdapter.notifyDataSetChanged();
+        checkItemCount();
     }
 
 

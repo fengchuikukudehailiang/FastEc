@@ -28,4 +28,6 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.orhanobut:logger:2.2.0'
     api project(':latte-ui')
+    //圆形图片
+    api 'de.hdodenhof:circleimageview:2.1.0'
 }
