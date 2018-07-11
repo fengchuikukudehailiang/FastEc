@@ -10,12 +10,12 @@ import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.ec.launcher.LauncherDelegate;
 import com.cock.latte.ec.main.EcBottomDelegate;
-import com.cock.latte.ec.main.index.IndexDelegate;
 import com.cock.latte.ec.sign.ISignListener;
 import com.cock.latte.ec.sign.SignInDelegate;
 import com.cock.latte.ui.launcher.ILauncherListener;
 import com.cock.latte.ui.launcher.OnLauncherFinishTag;
 
+import cn.jpush.android.api.JPushInterface;
 import qiu.niorgai.StatusBarCompat;
 
 public class FastEcActivity extends ProxyActivity implements
@@ -31,6 +31,19 @@ public class FastEcActivity extends ProxyActivity implements
         Latte.getConfigurator().withWeChatActivity(this);
         StatusBarCompat.translucentStatusBar(this, true);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
 
     @Override
     public LatteDelegate setRootDelegate() {

@@ -11,7 +11,7 @@ import com.cock.latte.core.app.Latte;
 import com.cock.latte.core.delegates.IPageLoadListener;
 import com.cock.latte.core.delegates.web.WebDelegate;
 import com.cock.latte.core.delegates.web.route.Router;
-import com.cock.latte.core.ui.LatteLoader;
+import com.cock.latte.core.ui.loader.LatteLoader;
 import com.cock.latte.core.utils.log.LatteLogger;
 import com.cock.latte.core.utils.storage.LattePreference;
 

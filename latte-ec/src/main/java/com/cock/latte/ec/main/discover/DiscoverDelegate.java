@@ -7,10 +7,13 @@ import android.view.View;
 
 import com.cock.latte.core.delegates.bottom.BottomItemDelegate;
 import com.cock.latte.core.delegates.web.WebDelegateImpl;
-import com.cock.latte.core.delegates.web.chromeclient.WebChromeClientImpl;
 import com.cock.latte.ec.R;
 
 public class DiscoverDelegate extends BottomItemDelegate {
+
+    //private String url = "http://101.132.182.17:8061/html5/index.html?pageType=1&empId=2017001";
+    //private String url = "http://www.hailiangcock.top";
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_discover;

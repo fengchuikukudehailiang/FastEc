@@ -9,17 +9,42 @@ import android.view.View;
 
 import com.cock.latte.core.delegates.bottom.BottomItemDelegate;
 import com.cock.latte.ec.R;
+import com.cock.latte.ec.main.personal.address.AddressDelegate;
 import com.cock.latte.ec.main.personal.list.ListAdapter;
 import com.cock.latte.ec.main.personal.list.ListBean;
 import com.cock.latte.ec.main.personal.list.ListItemType;
+import com.cock.latte.ec.main.personal.order.OrderListDelegate;
+import com.cock.latte.ec.main.personal.profile.UserProfileDelegate;
+import com.cock.latte.ec.main.personal.settings.SettingsDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalDelegate extends BottomItemDelegate {
+
+    public static final String ORDER_TYPE = "ORDER_TYPE";
+    private Bundle mArgs = null;
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_personal;
+    }
+
+    private void onClickAllOrder() {
+        mArgs.putString(ORDER_TYPE, "all");
+        startOrderListByType();
+    }
+
+    private void startOrderListByType() {
+        final OrderListDelegate delegate = new OrderListDelegate();
+        delegate.setArguments(mArgs);
+        getParentDelegate().getSupportDelegate().start(delegate);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mArgs = new Bundle();
     }
 
     @Override
@@ -42,12 +67,14 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean address = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
+                .setDelegate(new AddressDelegate())
                 .setText("收货地址")
                 .build();
 
         final ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
+                .setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
 
@@ -60,13 +87,10 @@ public class PersonalDelegate extends BottomItemDelegate {
         rvSettings.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         rvSettings.setAdapter(adapter);
-    }
-
-    private void onClickAllOrder() {
-
+        rvSettings.addOnItemTouchListener(new PersonalClickListener(this));
     }
 
     private void onClickAvatar() {
-
+        getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
     }
 }

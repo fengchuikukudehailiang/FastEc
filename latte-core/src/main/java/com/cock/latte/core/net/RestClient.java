@@ -8,8 +8,8 @@ import com.cock.latte.core.net.callback.IRequest;
 import com.cock.latte.core.net.callback.ISuccess;
 import com.cock.latte.core.net.callback.RequestCallbacks;
 import com.cock.latte.core.net.download.DownloadHandler;
-import com.cock.latte.core.ui.LatteLoader;
-import com.cock.latte.core.ui.LoaderStyle;
+import com.cock.latte.core.ui.loader.LatteLoader;
+import com.cock.latte.core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

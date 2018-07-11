@@ -6,7 +6,7 @@ import com.cock.latte.core.net.callback.IError;
 import com.cock.latte.core.net.callback.IFailure;
 import com.cock.latte.core.net.callback.IRequest;
 import com.cock.latte.core.net.callback.ISuccess;
-import com.cock.latte.core.ui.LoaderStyle;
+import com.cock.latte.core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

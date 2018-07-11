@@ -2,7 +2,7 @@ package com.cock.latte.core.net.rx;
 
 import android.content.Context;
 
-import com.cock.latte.core.ui.LoaderStyle;
+import com.cock.latte.core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.cock.latte.core.net.HttpMethod;
 import com.cock.latte.core.net.RestCreator;
-import com.cock.latte.core.ui.LatteLoader;
-import com.cock.latte.core.ui.LoaderStyle;
+import com.cock.latte.core.ui.loader.LatteLoader;
+import com.cock.latte.core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

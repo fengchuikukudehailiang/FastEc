@@ -1,4 +1,4 @@
-package com.cock.latte.core.ui;
+package com.cock.latte.core.ui.loader;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;

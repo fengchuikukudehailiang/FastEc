@@ -1,4 +1,4 @@
-package com.cock.latte.core.ui;
+package com.cock.latte.core.ui.loader;
 
 @SuppressWarnings("unused")
 public enum LoaderStyle {

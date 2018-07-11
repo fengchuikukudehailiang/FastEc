@@ -10,8 +10,13 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cock.latte.core.delegates.bottom.BottomItemDelegate;
+import com.cock.latte.core.utils.callback.CallbackManager;
+import com.cock.latte.core.utils.callback.CallbackType;
+import com.cock.latte.core.utils.callback.IGlobalCallback;
+import com.cock.latte.core.utils.log.LatteLogger;
 import com.cock.latte.ec.R;
 import com.cock.latte.ec.main.EcBottomDelegate;
 import com.cock.latte.ui.recycler.divider.BaseDecoration;
@@ -36,7 +41,20 @@ public class IndexDelegate extends BottomItemDelegate {
         mRefreshLayout = $(R.id.srl_index);
         final IconTextView mIconScan = $(R.id.icon_index_scan);
         final AppCompatEditText mSearchView = $(R.id.et_search_view);
+        mIconScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startScanWithCheck(getParentDelegate());
+            }
+        });
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
+        CallbackManager.getInstance().addCallback(CallbackType.ON_SCAN, new IGlobalCallback() {
+            @Override
+            public void executeCallback(@Nullable Object args) {
+                LatteLogger.d("得到的的二维码是" + args);
+                Toast.makeText(getContext(), "得到的的二维码是" + args, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

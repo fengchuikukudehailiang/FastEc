@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.cock.latte.core.delegates.LatteDelegate;
 import com.cock.latte.core.net.rx.RxRestClient;
-import com.cock.latte.core.ui.LoaderStyle;
+import com.cock.latte.core.ui.loader.LoaderStyle;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

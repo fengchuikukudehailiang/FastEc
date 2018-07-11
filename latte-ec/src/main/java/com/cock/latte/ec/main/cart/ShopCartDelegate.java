@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.cock.latte.core.delegates.bottom.BottomItemDelegate;
 import com.cock.latte.core.net.RestClient;
 import com.cock.latte.core.net.callback.ISuccess;
-import com.cock.latte.core.utils.log.LatteLogger;
 import com.cock.latte.ec.R;
 import com.cock.latte.ec.main.EcBottomDelegate;
 import com.cock.latte.ui.recycler.MultipleItemEntity;
@@ -25,7 +24,10 @@ import com.joanzapata.iconify.widget.IconTextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener, View.OnClickListener {
+public class ShopCartDelegate extends BottomItemDelegate
+        implements ISuccess,
+        ICartItemListener,
+        View.OnClickListener {
 
     private ShopCartAdapter mAdapter = null;
 
@@ -77,6 +79,8 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        mTotalPrice = mAdapter.getTotalPrice();
+        mTvTotalPrice.setText(String.valueOf(mTotalPrice));
         checkItemCount();
     }
 
@@ -133,19 +137,23 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         final List<MultipleItemEntity> data = mAdapter.getData();
         //要删除的数据
         final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
-        int i = 0;
         for (MultipleItemEntity entity : data) {
             final boolean isSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
-            entity.setField(ShopCartItemFields.POSITION, i); //每次重新赋值位置
             if (isSelected) {
                 deleteEntities.add(entity);
             }
-            i++;
         }
-        //从List中最后一个开始删除，防止引起下标的变动
-        for (int j = deleteEntities.size()-1; j >=0; j--) {
-            int removePosition = deleteEntities.get(j).getField(ShopCartItemFields.POSITION);
-            mAdapter.remove(removePosition); //remove方法内部调用notifyItemRangeChanged
+        //清空当前选中的item
+        for (MultipleItemEntity entity : deleteEntities) {
+            final int entityPosition = entity.getField(ShopCartItemFields.POSITION);
+            if (entityPosition < mAdapter.getItemCount()) {
+                mAdapter.remove(entityPosition);
+                //把后面的所有数据的position都减一
+                for (int i = entityPosition; i < mAdapter.getItemCount(); i++) {
+                    int currentPosition = (int) mAdapter.getData().get(i).getField(ShopCartItemFields.POSITION) - 1;
+                    mAdapter.getData().get(i).setField(ShopCartItemFields.POSITION, currentPosition);
+                }
+            }
         }
         checkItemCount();
     }
