@@ -19,11 +19,12 @@ import com.cock.latte.core.utils.callback.IGlobalCallback;
 import com.cock.latte.core.utils.log.LatteLogger;
 import com.cock.latte.ec.R;
 import com.cock.latte.ec.main.EcBottomDelegate;
+import com.cock.latte.ec.main.index.search.SearchDelegate;
 import com.cock.latte.ui.recycler.divider.BaseDecoration;
 import com.cock.latte.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
-public class IndexDelegate extends BottomItemDelegate {
+public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
 
     private RecyclerView mRecyclerView = null;
     private SwipeRefreshLayout mRefreshLayout = null;
@@ -55,6 +56,7 @@ public class IndexDelegate extends BottomItemDelegate {
                 Toast.makeText(getContext(), "得到的的二维码是" + args, Toast.LENGTH_SHORT).show();
             }
         });
+        mSearchView.setOnFocusChangeListener(this);
     }
 
     @Override
@@ -90,5 +92,12 @@ public class IndexDelegate extends BottomItemDelegate {
         initRefreshLayout();
         initRecyclerView();
         mRefreshHandler.firstPage("index.php");
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+            getParentDelegate().start(new SearchDelegate());
+        }
     }
 }

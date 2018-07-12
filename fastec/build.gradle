@@ -3,7 +3,15 @@ apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
-
+    compileOptions.encoding = 'UTF-8'
+    signingConfigs {
+        release {
+            storeFile file(rootProject.rootDir.toString() + RELEASE_STOREFILE)
+            storePassword RELEASE_STOREPASSWORD
+            keyAlias RELEASE_KEYALIAS
+            keyPassword RELEASE_KEYPASSWORD
+        }
+    }
     defaultConfig {
         applicationId "com.cock.fastec"
         minSdkVersion 16
@@ -22,12 +30,28 @@ android {
                 JPUSH_APPKEY : "8e5b77cb8ae96a08b3aff133",
                 JPUSH_CHANNEL: "developer-default",
         ]
+        signingConfig signingConfigs.release
     }
     buildTypes {
+        /* debug {
+             // debug模式
+             multiDexEnabled true
+             // 是否进行混淆
+             minifyEnabled false
+             proguardFile 'proguard.cfg'
+             signingConfig signingConfigs.debug
+         }*/
         release {
-            minifyEnabled false
+            multiDexEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    productFlavors {
     }
 }
 
